@@ -1,6 +1,8 @@
 package graphe_main;
 
 import java.util.*;
+import java.util.stream.*;
+
 
 public class Graphe {
 
@@ -34,17 +36,58 @@ public class Graphe {
         return taille_ordre;
     }
 
-    static Set<Integer> grapheComplet(int n){
-
-
-
+    public int degres(Set voisins){
+        return voisins.size();
     }
 
+
+    public int taille(TreeMap carte_graphe){
+        return carte_graphe.size()/2;
+    }
+
+    public int degre_minimal(TreeMap carte_graphe){
+        int degre_min = 154674;
+        for (int i = 0; i < carte_graphe.size(); i ++){
+            for (int j = 0; j < carte_graphe.size(); j ++){
+                 Set test = (Set) carte_graphe.get(i);
+                 if (test.size() < degre_min){
+                     degre_min = test.size();
+                 }
+
+
+            }
+
+        }
+        return degre_min;
+    }
+
+    public int degre_maximal(TreeMap carte_graphe){
+        int degre_max = 0;
+        for (int i = 0; i < carte_graphe.size(); i ++){
+            for (int j = 0; j < carte_graphe.size(); j ++){
+                Set test = (Set) carte_graphe.get(i);
+                if (test.size() > degre_max){
+                    degre_max = test.size();
+                }
+
+
+            }
+
+        }
+        return degre_max;
+    }
+
+
+
     public String toString() {
-        String to_string = "" + carte_graphe;
+
         System.out.printf("ordre ; " + ordre_graphe() + "\n");
+        System.out.println("taille ; " + taille(carte_graphe));
+        System.out.println("degre minimal ; " + degre_minimal(carte_graphe));
+        System.out.println("degre maximal ; " + degre_maximal(carte_graphe));
         for (int i = 0 ; i < carte_graphe.size(); i++) {
-           return("sommet ; " + i + " " + to_string);
+            System.out.println(("sommet : " + i + " degres : " + degres(carte_graphe.get(i)) + " voisins : "+  carte_graphe.get(i)));
+
         }
         return "";
     }
