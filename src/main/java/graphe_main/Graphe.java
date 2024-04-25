@@ -77,6 +77,16 @@ public class Graphe {
         return degre_max;
     }
 
+    public Graphe grapheComplet(int nbre_sommets){
+        TreeMap gr_cm_carte_graphe = new TreeMap<>();
+        for (int i = 0; i < nbre_sommets; i++) {
+            gr_cm_carte_graphe.put()
+        }
+
+
+
+    }
+
 
 
     public String toString() {
