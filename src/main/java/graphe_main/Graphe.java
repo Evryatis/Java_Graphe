@@ -1,5 +1,7 @@
 package graphe_main;
 
+import javafx.util.Pair;
+
 import java.util.*;
 import java.util.stream.*;
 
@@ -19,6 +21,48 @@ public class Graphe {
             carte_graphe.put(i, voisins);
         }
     }
+
+    /*
+    Fonctions algorithmiques
+     */
+
+
+    /*
+    Fonction algorithmique parcoursEnLargeur ;
+    prend en paramètre le sommet de départ,renvoie le dictionnaire des prédécesseurs dans lequel :
+        > chaque clef est un sommet
+        > chaque valeur est un couple contenant :
+    ? le sommet précédent dans le plus court chemin qui va du sommet de départ au sommet clef
+    ? la distance la plus courte pour atteindre ce sommet pour atteindre le sommet cle
+     */
+    public TreeMap<Integer, Set<Integer>> parcoursEnLargeur(int sommet_depart){
+
+        // On crée le dictionnaire a renvoyer
+        TreeMap<Integer, Set<Integer>> dict_predec = new TreeMap<>();
+
+        // On crée la liste des elements
+        ArrayList<Integer> liste_attente = new ArrayList<Integer>();
+        liste_attente.add(sommet_depart);
+        while (! liste_attente.isEmpty()) {
+            int nettoyage = liste_attente.remove(0);
+            for (Integer sommet : this.carte_graphe.get(nettoyage))
+                if (! dict_predec.containsKey(sommet)) {
+                    dict_predec.put(sommet, (Set<Integer>) new Pair(nettoyage, dict_predec.get(nettoyage)));
+                    liste_attente.add(sommet);
+                }
+        }
+
+        return dict_predec;
+
+
+    }
+
+    public List <Integer> plusCourtChemin(int depart, int arrivee){
+
+        TreeMap<Integer, Set<Integer>> predeccesseurs = parcoursEnLargeur(depart);
+
+    }
+
 
     public Set<Integer> ensemble_sommet(){
         Set<Integer> set_ensemble_sommet = new HashSet<>();
@@ -77,15 +121,6 @@ public class Graphe {
         return degre_max;
     }
 
-    public Graphe grapheComplet(int nbre_sommets){
-        TreeMap gr_cm_carte_graphe = new TreeMap<>();
-        for (int i = 0; i < nbre_sommets; i++) {
-            gr_cm_carte_graphe.put()
-        }
-
-
-
-    }
 
 
 
